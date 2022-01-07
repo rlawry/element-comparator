@@ -1,0 +1,28 @@
+<html>
+<link rel="stylesheet" href="main.css" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="tools.js"></script>
+<script src="lines.js"></script>
+<title>Unknown Element Combos</title>
+<body onload="init()">
+    <div class="title">Determine the Contents of the Unknown Gas Mixture</div>
+    <div class="canvasses">
+        <div class="header">Unknown Sample Mixture (<span id="count"></span>)</div>
+        <canvas id="unknown"></canvas>
+        <div class="header">Known Sample</div>
+        <canvas id="known"></canvas>
+    </div>                                                                               
+    <div class="display-options">
+        <div><span>Display a known element: </span><select class="select-box" id="elementSelect" oninput="plot(this.options[this.selectedIndex].value)">...Select...</select></div>
+        <div>Line Width <select class="select-box" id="lineWidth" oninput="update()">
+            <option value="1">1px</option>
+            <option value="2">2px</option>
+            <option value="3" selected>3px</option>
+            <option value="4">4px</option>
+            </select>
+        </div>
+        <div><input type="checkbox" name="showSpectra" value="isChecked" onclick="switchState()"> Show absorption</div>
+    </select></div>
+    <div class="game"></div>
+</body>
+</html>

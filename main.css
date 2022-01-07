@@ -1,0 +1,182 @@
+[data-tip] {
+    position: relative;
+}
+
+[data-tip]:before {
+    content: '';
+    /* hides the tooltip when not hovered */
+    display: none;
+    content: '';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #1a1a1a;
+    position: absolute;
+    top: 30px;
+    left: 35px;
+    z-index: 8;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0;
+}
+
+[data-tip]:after {
+    display: none;
+    content: attr(data-tip);
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    padding: 5px 5px;
+    background: #1a1a1a;
+    color: #fff;
+    z-index: 9;
+    font-size: 0.75em;
+    height: 18px;
+    line-height: 18px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+    display: block;
+}
+
+input[type=text],
+select {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-weight:800;
+}
+
+#lineWidth {
+    width: 10%;
+}
+
+input[type=update]:focus {
+    outline: none;
+    box-shadow: inset 0 0px 5px 0 rgba(255, 255, 255, 0.7);
+    user-select: none;
+}
+
+input[type=update] {
+    width: 15%;
+    background-color: rgb(82, 78, 134);
+    color: transparent;
+    text-shadow: 0px 0px 0px white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: rgb(88, 134, 50);
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: background-color 0.4s;
+}
+
+.display-options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:auto;
+    width:100%;
+    text-align: center;
+    font-size: 1.9vh;
+    caret-color: transparent;
+    user-select: none;
+}
+
+.display-options > div {
+    flex: 50%;
+}
+
+input[type=update]:hover {
+    background-color: rgb(100, 42, 88);
+    user-select: none;
+}
+
+#scaleTitle {
+    transform: scale(2.0, 1.2);
+    background-color: black;
+}
+
+div {
+    border-radius: 0px;
+    background-color: #222222;
+    padding: 5px;
+    width: 100%;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    font-family: Arial;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.title {
+    background-color: black;
+    top: 10px;
+    width: 50%;
+    margin:auto;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.title:hover {
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+    transition: 1s;
+}
+
+a {
+    color: white;
+    transition: color 0.5s;
+}
+
+a:hover {
+    color: red;
+}
+
+canvas {
+    width: 90%;
+    height: 150px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.canvasses{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header{
+    margin: auto;
+    width:90%;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.5vw;
+}
