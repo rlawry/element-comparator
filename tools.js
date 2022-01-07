@@ -351,15 +351,7 @@ function generateUnknownSample(){
     };
     console.log(elementList)
     drawUnknown();
-    document.getElementById("count").innerHTML = elementList.length + " elements";
-
-    var mySelect = $('#elementSelect');                               //Code to automatically set the dropdown options to those found in lines.js
-    $.each(elementalLines, function (val, text) {
-        mySelect.append(
-            $('<option></option>').val(val).html(val)
-        );
-    });
-    var mySelect = $('#knownObjects');  
+    document.getElementById("count").innerHTML = elementList.length + " elements"; 
 }
 
 function drawUnknown(){
