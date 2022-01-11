@@ -23,6 +23,15 @@
         </div>
         <div><input type="checkbox" name="showSpectra" value="isChecked" onclick="switchState()"> Show absorption</div>
     </select></div>
-    <div class="game"></div>
+    <div class="game">
+        <div id="guess-container" class="guess-container"></div>
+    </div>
+    <script>
+    $(function() {                       //run when the DOM is ready
+        $(".guess").click(function() {  //use a class, since your ID gets mangled
+          $(this).toggleClass("active");      //add the class to the clicked element
+        });
+    });
+    </script>
 </body>
 </html>

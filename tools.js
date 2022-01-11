@@ -89,6 +89,20 @@ function init() {                                                               
 
     plotElement('Hydrogen', ctxKnown, "mix");
     generateUnknownSample();
+    makeSelections();
+    
+}
+
+function makeSelections(){
+    var selectionsContainer = document.getElementById("guess-container");
+    var selection;
+    for(var i = 0; i<Object.keys(elementalLines).length;i++){
+        selection = document.createElement('div');
+        selection.className = "guess";
+        selection.textContent = Object.keys(elementalLines)[i];
+        console.log(selection.textContent);
+        selectionsContainer.appendChild(selection);
+    }
 }
 
 function fillCanvas(e){

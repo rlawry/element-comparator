@@ -95,6 +95,7 @@ input[type=update] {
     font-size: 1.9vh;
     caret-color: transparent;
     user-select: none;
+    padding-bottom: 1vh;
 }
 
 .display-options > div {
@@ -114,7 +115,6 @@ input[type=update]:hover {
 div {
     border-radius: 0px;
     background-color: #222222;
-    padding: 5px;
     width: 100%;
 }
 
@@ -131,7 +131,7 @@ body {
 .title {
     background-color: black;
     top: 10px;
-    width: 50%;
+    width: 100%;
     margin:auto;
     text-align: center;
     font-size: 2vw;
@@ -167,10 +167,49 @@ canvas {
     margin-left: auto;
 }
 
+.guess-container{
+    padding-top:1vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: gray;
+    caret-color: transparent;
+    user-select: none;
+}
+.guess{
+    width: 10%;
+    padding: 1.05vh;
+    font-size: 1.4vh;
+    font-weight: 800;
+    background-color: yellow;
+    color: black;
+    margin: 0.7vh;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.select-box{
+    font-size: 1.3vw;
+}
+
+.guess:hover{
+    background-color: rgb(50,50,50);
+    color:rgb(255, 255, 255);
+    text-shadow: 0 0 3px #000000
+}
+
+.active{
+    background-color: rgb(70,70,70);
+    color:rgb(255, 255, 255);
+    text-shadow: 0 0 3px #000000
+}
+
 .canvasses{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width:100%;
 }
 
 .header{
