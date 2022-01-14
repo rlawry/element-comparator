@@ -23,6 +23,7 @@ var elementList = new Array();
 var first = true;
 var selectTotal = 0;
 var selectedOption = {};
+var points = 0;
 
 function setGradient() {
 
@@ -114,8 +115,10 @@ function submitGuess(){
         if(score <= 0){
             $('.score').text("You lose");
         }
-        else if(score == target){$('.score').text("You win");}
-        else if(score>0&&score<target){$('.score').text("Close");}
+        else if(score == target){
+            points++;
+            $('.score').text("You win. " + points + " points");}
+        else if(score>0&&score<target){$('.score').text("Something is right.");}
     }
     else{
         $('.score').text("Too many");
@@ -382,15 +385,15 @@ function plot(e){
 }
 
 function generateUnknownSample(){
-    var totalElements = 3;
+    var totalElements = 8;
     var elementTotal = Object.keys(elementalLines).length;
     console.log(elementTotal + " total");
     var randomInt = 0;
     while(elementList.length<totalElements){
         randomInt = Math.floor(Math.random()*elementTotal);
-        if(elementList.includes(randomInt) === false){elementList.push(Object.keys(elementalLines)[randomInt]);}
+        if(elementList.includes(Object.keys(elementalLines)[randomInt]) === false){elementList.push(Object.keys(elementalLines)[randomInt]);}
     };
-    console.log(elementList)
+    console.log(elementList);
     drawUnknown();
     document.getElementById("count").innerHTML = elementList.length + " elements"; 
 }
