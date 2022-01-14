@@ -4,6 +4,7 @@
 <script src="tools.js"></script>
 <script src="lines.js"></script>
 <title>Unknown Element Combos</title>
+
 <body onload="init()">
     <div class="title">Determine the Contents of the Unknown Gas Mixture</div>
     <div class="canvasses">
@@ -25,13 +26,27 @@
     </select></div>
     <div class="game">
         <div id="guess-container" class="guess-container"></div>
+        <div id="guess-counter" class="guess-counter">0 elements selected</div>
+        <div class="submit-guess" onclick="submitGuess();">Submit Guess</div>
+        <div class="score">0 points</div>
     </div>
     <script>
     $(function() {                       //run when the DOM is ready
-        $(".guess").click(function() {  //use a class, since your ID gets mangled
+        $(".guess").on('click',function() {  //use a class, since your ID gets mangled
           $(this).toggleClass("active");      //add the class to the clicked element
+          if(selectedOption[$(this).text()]==false){
+              selectedOption[$(this).text()]=true;
+              selectTotal++;
+            }
+          else if(selectedOption[$(this).text()]==true){
+              selectedOption[$(this).text()]=false;
+              selectTotal--;            
+            }
+            if(selectTotal==1){$('#guess-counter').text(selectTotal + " element selected");}
+            else if (selectTotal!=1){$('#guess-counter').text(selectTotal + " elements selected");}
         });
     });
-    </script>
+    
+    </script>  
 </body>
 </html>

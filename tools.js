@@ -21,6 +21,8 @@ var canvasUnknown, ctxUnknown, canvasKnown, ctxKnown;
 var totalUnknown = 0;
 var elementList = new Array();
 var first = true;
+var selectTotal = 0;
+var selectedOption = {};
 
 function setGradient() {
 
@@ -89,8 +91,35 @@ function init() {                                                               
 
     plotElement('Hydrogen', ctxKnown, "mix");
     generateUnknownSample();
-    makeSelections();
-    
+    makeSelections();   
+}
+
+function submitGuess(){
+    var score = 0;
+    var target = 3;
+    var totalClicked = 0;
+    var sel = document.querySelectorAll(".guess");
+    console.log(sel[1].id);
+    console.log(sel[1].classList);
+    for (var i = 0; i<sel.length;i++){
+        if(sel[i].classList.contains("active")==true){
+            if(elementList.includes(sel[i].id)==true){score++;}
+            else{
+                $('.score').text("You lose");
+                break;
+            }
+        }
+    }
+    if(selectTotal<=target){
+        if(score <= 0){
+            $('.score').text("You lose");
+        }
+        else if(score == target){$('.score').text("You win");}
+        else if(score>0&&score<target){$('.score').text("Close");}
+    }
+    else{
+        $('.score').text("Too many");
+    }
 }
 
 function makeSelections(){
@@ -100,8 +129,9 @@ function makeSelections(){
         selection = document.createElement('div');
         selection.className = "guess";
         selection.textContent = Object.keys(elementalLines)[i];
-        console.log(selection.textContent);
+        selection.id = selection.textContent;
         selectionsContainer.appendChild(selection);
+        selectedOption[selection.textContent] = false;
     }
 }
 
@@ -272,7 +302,6 @@ function plotElement(e, k, n) {
     for(var i = 0; i<intensity.length;i++){
         if(intensity[i]>maxIntensity){maxIntensity = intensity[i];}
     }
-    console.log(n);
     var gradient = setGradient();                                                   //set the gradient maps so you can choose the correct color
     if(n=="no-mix"){                                              
         if (showSpectrum == false) {
@@ -359,9 +388,7 @@ function generateUnknownSample(){
     var randomInt = 0;
     while(elementList.length<totalElements){
         randomInt = Math.floor(Math.random()*elementTotal);
-        if(elementList.includes(randomInt) === false){elementList.push(randomInt);}
-        console.log(randomInt);
-        console.log(elementList);
+        if(elementList.includes(randomInt) === false){elementList.push(Object.keys(elementalLines)[randomInt]);}
     };
     console.log(elementList)
     drawUnknown();
@@ -369,8 +396,8 @@ function generateUnknownSample(){
 }
 
 function drawUnknown(){
-    for(var i = 0; i<elementList.length; i++){
-        plotElement(Object.keys(elementalLines)[elementList[i]],ctxUnknown,"mix");
+    for(var i = 0; i<Object.keys(elementList).length; i++){
+        plotElement(elementList[i],ctxUnknown,"mix");
     }
 }
 
