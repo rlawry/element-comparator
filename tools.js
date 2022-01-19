@@ -99,7 +99,7 @@ function submitGuess(){
     var score = 0;
     var target = 3;
     var totalClicked = 0;
-    var sel = document.querySelectorAll(".guess");
+    var sel = document.querySelectorAll(".guess-button");
     console.log(sel[1].id);
     console.log(sel[1].classList);
     for (var i = 0; i<sel.length;i++){
@@ -113,16 +113,17 @@ function submitGuess(){
     }
     if(selectTotal<=target){
         if(score <= 0){
-            $('.score').text("You lose");
+            $('.score-message').text("You lose");
         }
         else if(score == target){
             points++;
-            $('.score').text("You win. " + points + " points");}
-        else if(score>0&&score<target){$('.score').text("Something is right.");}
+            $('.score-message').text("You win.");}
+        else if(score>0&&score<target){$('.score-message').text("Something is right.");}
     }
     else{
-        $('.score').text("Too many");
+        $('.score-message').text("Too many");
     }
+    $('.score').text(points + " points");
 }
 
 function makeSelections(){
@@ -130,7 +131,7 @@ function makeSelections(){
     var selection;
     for(var i = 0; i<Object.keys(elementalLines).length;i++){
         selection = document.createElement('div');
-        selection.className = "guess";
+        selection.className = "guess-button";
         selection.textContent = Object.keys(elementalLines)[i];
         selection.id = selection.textContent;
         selectionsContainer.appendChild(selection);
@@ -291,7 +292,7 @@ var positionBuffer = 0;
 var lineCount = 0;
 
 
-function plotElement(e, k, n) {
+function plotElement(e, k, n) {         //e = element must be string, k = context for drawing, n = mix or not <-- this one is not necessary given the context
     positionTracker.splice(0, positionTracker.length)                               //Avoid overlap
     var elementSel = document.getElementById("elementSelect");                      //Take the html element "element" to use in this function.
     var element = e;                                                                //Set a variable equal to the value of the selected index
@@ -385,7 +386,7 @@ function plot(e){
 }
 
 function generateUnknownSample(){
-    var totalElements = 8;
+    var totalElements = 3;
     var elementTotal = Object.keys(elementalLines).length;
     console.log(elementTotal + " total");
     var randomInt = 0;

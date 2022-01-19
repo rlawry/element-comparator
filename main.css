@@ -1,122 +1,4 @@
-[data-tip] {
-    position: relative;
-}
 
-[data-tip]:before {
-    content: '';
-    /* hides the tooltip when not hovered */
-    display: none;
-    content: '';
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #1a1a1a;
-    position: absolute;
-    top: 30px;
-    left: 35px;
-    z-index: 8;
-    font-size: 0;
-    line-height: 0;
-    width: 0;
-    height: 0;
-}
-
-[data-tip]:after {
-    display: none;
-    content: attr(data-tip);
-    position: absolute;
-    top: 35px;
-    left: 0px;
-    padding: 5px 5px;
-    background: #1a1a1a;
-    color: #fff;
-    z-index: 9;
-    font-size: 0.75em;
-    height: 18px;
-    line-height: 18px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    white-space: nowrap;
-    word-wrap: normal;
-}
-
-[data-tip]:hover:before,
-[data-tip]:hover:after {
-    display: block;
-}
-
-input[type=text],
-select {
-    width: 15%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #555;
-    border-radius: 4px;
-    box-sizing: border-box;
-    text-align: center;
-    background-color: black;
-    color: white;
-    font-weight:800;
-}
-
-#lineWidth {
-    width: 10%;
-}
-
-input[type=update]:focus {
-    outline: none;
-    box-shadow: inset 0 0px 5px 0 rgba(255, 255, 255, 0.7);
-    user-select: none;
-}
-
-input[type=update] {
-    width: 15%;
-    background-color: rgb(82, 78, 134);
-    color: transparent;
-    text-shadow: 0px 0px 0px white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: rgb(88, 134, 50);
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-    user-select: none;
-    transition: background-color 0.4s;
-}
-
-.display-options{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin:auto;
-    width:100%;
-    text-align: center;
-    font-size: 1.9vh;
-    caret-color: transparent;
-    user-select: none;
-    padding-bottom: 1vh;
-}
-
-.display-options > div {
-    flex: 50%;
-}
-
-input[type=update]:hover {
-    background-color: rgb(100, 42, 88);
-    user-select: none;
-}
-
-#scaleTitle {
-    transform: scale(2.0, 1.2);
-    background-color: black;
-}
-
-div {
-    border-radius: 0px;
-    background-color: #222222;
-    width: 100%;
-}
 
 html,
 body {
@@ -129,12 +11,14 @@ body {
 }
 
 .title {
-    background-color: black;
+    background-color: "rgb(10,0,0)";
+    text-shadow: 0px 0px 10px rgb(255,255,255);
     top: 10px;
+    padding-top: 2%;
     width: 100%;
     margin:auto;
     text-align: center;
-    font-size: 2vw;
+    font-size: 2rem;
 }
 
 .title:hover {
@@ -160,11 +44,78 @@ a:hover {
     color: red;
 }
 
+div {
+    border-radius: 0px;
+    background-color: #222222;
+    width: 100%;
+}
+
 canvas {
     width: 90%;
     height: 150px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.header{
+    margin: auto;
+    width:90%;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-family: "Georgia", Georgia, serif;
+}
+
+.display-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:auto;
+    width:100%;
+    text-align: center;
+    font-size: 1.9vh;
+    caret-color: transparent;
+    user-select: none;
+    padding-bottom: 1vh;
+}
+
+.display-options > div {
+    flex: 50%;
+}
+
+.element-display{
+    padding-left: 7%;
+}
+
+.line-display{
+
+}
+
+.absorption-display{
+
+}
+
+input[type=text], select {
+    width: 15%;
+    font-size: 0.8rem;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-weight: 800;
+}
+
+#lineWidth {
+    width: 30%;
+}
+
+#elementSelect {
+    width: 40%;
 }
 
 .game{
@@ -185,7 +136,8 @@ canvas {
 }
 
 .guess-container{
-    padding-top:1vh;
+    padding-top:10px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -194,13 +146,13 @@ canvas {
     caret-color: transparent;
     user-select: none;
 }
-.guess{
+.guess-button{
     width: 140px;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-right: 28px;
     padding-left: 28px;
-    font-size: 1.2vh;
+    font-size: 1.2rem;
     font-weight: 800;
     background-color: yellow;
     color: black;
@@ -212,10 +164,10 @@ canvas {
     transition: 0.5s;
     -webkit-box-shadow: 5px 5px 5px #666;
     box-shadow: 5px 5px 5px #666;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
-.submit-guess{
+.submit-guess-button{
     user-select: none;
     caret-color: transparent;
     background-color: tomato;
@@ -232,12 +184,15 @@ canvas {
     background-color: forestgreen;
 }
 
-.select-box{
-    font-size: 1.3vw;
+.submission-panel{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0px;
 }
 
-.score{
-    width: 100%;
+.score, .score-message{
+    width: 30%;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 1.5vw;
@@ -264,10 +219,7 @@ canvas {
     width:100%;
 }
 
-.header{
-    margin: auto;
-    width:90%;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 1.5vw;
+.bottom-canvas{
+    border-top: solid;
+    border-color: rgb(80,80,80);
 }

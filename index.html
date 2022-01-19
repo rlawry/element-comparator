@@ -10,29 +10,32 @@
     <div class="canvasses">
         <div class="header">Unknown Sample Mixture (<span id="count"></span>)</div>
         <canvas id="unknown"></canvas>
-        <div class="header">Known Sample</div>
+        <div class="header bottom-canvas">Known Sample</div>
         <canvas id="known"></canvas>
     </div>                                                                               
     <div class="display-options">
-        <div><span>Display a known element: </span><select class="select-box" id="elementSelect" oninput="plot(this.options[this.selectedIndex].value)">...Select...</select></div>
-        <div>Line Width <select class="select-box" id="lineWidth" oninput="update()">
+        <div class="element-display"><span>Display a known element: </span><select class="select-box" id="elementSelect" onchange="plot(this.options[this.selectedIndex].value)"></select></div>
+        <div class="line-display">Line Width <select class="select-box" id="lineWidth" onchange="update()">
             <option value="1">1px</option>
             <option value="2">2px</option>
             <option value="3" selected>3px</option>
             <option value="4">4px</option>
             </select>
         </div>
-        <div><input type="checkbox" name="showSpectra" value="isChecked" onclick="switchState()"> Show absorption</div>
+        <div class="absorption-display"><input type="checkbox" name="showSpectra" value="isChecked" onclick="switchState()"> Show absorption</div>
     </select></div>
     <div class="game">
         <div id="guess-container" class="guess-container"></div>
         <div id="guess-counter" class="guess-counter">0 elements selected</div>
-        <div class="submit-guess" onclick="submitGuess();">Submit Guess</div>
-        <div class="score">0 points</div>
+        <div class="submission-panel">
+            <div class="submit-guess-button" onclick="submitGuess();">Submit Guess</div>
+            <div class="score-message">Click the elements you think are in the sample</div>
+            <div class="score">0 points</div>
+        </div>
     </div>
     <script>
     $(function() {                       //run when the DOM is ready
-        $(".guess").on('click',function() {  //use a class, since your ID gets mangled
+        $(".guess-button").on('click',function() {  //use a class, since your ID gets mangled
           $(this).toggleClass("active");      //add the class to the clicked element
           if(selectedOption[$(this).text()]==false){
               selectedOption[$(this).text()]=true;
@@ -46,7 +49,20 @@
             else if (selectTotal!=1){$('#guess-counter').text(selectTotal + " elements selected");}
         });
     });
-    
+    document.getElementById('elementSelect').addEventListener('wheel', function(e) {
+        if (this.hasFocus) {
+            return;
+        }
+        if (e.deltaY < 0) {
+            if(this.selectedIndex - 1 < 0){this.selectedIndex = this.length-1;}
+            else{this.selectedIndex = Math.max(this.selectedIndex - 1, 0);}
+        }
+        if (e.deltaY > 0) {
+            if(this.selectedIndex + 1 >= this.length){this.selectedIndex = 0;}
+            else{this.selectedIndex = Math.min(this.selectedIndex + 1, this.length);}
+        }
+        plot(Object.keys(elementalLines)[this.selectedIndex]);
+    });
     </script>  
 </body>
 </html>
