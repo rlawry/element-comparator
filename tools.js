@@ -24,6 +24,7 @@ var first = true;
 var selectTotal = 0;
 var selectedOption = {};
 var points = 0;
+var newGameStarted = true;
 
 function setGradient() {
 
@@ -293,7 +294,7 @@ var lineCount = 0;
 
 
 function plotElement(e, k, n) {         //e = element must be string, k = context for drawing, n = mix or not <-- this one is not necessary given the context
-    positionTracker.splice(0, positionTracker.length)                               //Avoid overlap
+    positionTracker.splice(0, positionTracker.length);                               //Avoid overlap
     var elementSel = document.getElementById("elementSelect");                      //Take the html element "element" to use in this function.
     var element = e;                                                                //Set a variable equal to the value of the selected index
     spectra = elementalLines[element]['spectra'];
@@ -307,7 +308,7 @@ function plotElement(e, k, n) {         //e = element must be string, k = contex
         if(intensity[i]>maxIntensity){maxIntensity = intensity[i];}
     }
     var gradient = setGradient();                                                   //set the gradient maps so you can choose the correct color
-    if(n=="no-mix"){                                              
+    if(n=="no-mix"||newGameStarted==true){                                              
         if (showSpectrum == false) {
             k.fillStyle = 'black';                                                    //fill the rectangles with the correct base colors
             k.fillRect(0, padding, k.canvas.width, diagramMax - padding);
@@ -316,6 +317,7 @@ function plotElement(e, k, n) {         //e = element must be string, k = contex
             k.fillStyle = gradient;
             k.fillRect(0, padding, k.canvas.width, diagramMax - padding);
         }
+        newGameStarted=false;
     }
     else if(n=="mix"){
         if(first == true){
@@ -381,8 +383,17 @@ function plotElement(e, k, n) {         //e = element must be string, k = contex
     lineCount = 0;
 }
 
+function newGame(){
+    elementList.splice(0, elementList.length);
+    points=0;
+    newGameStarted = true;
+    generateUnknownSample();
+    document.getElementById("score").innerHTML = "0 points";
+}
+
 function plot(e){
     plotElement(e,ctxKnown,"no-mix");
+    console.log("YOW");
 }
 
 function generateUnknownSample(){

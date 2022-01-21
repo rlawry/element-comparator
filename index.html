@@ -6,6 +6,10 @@
 <title>Unknown Element Combos</title>
 
 <body onload="init()">
+    <div class="topnav" id="myTopnav">
+        <a href="#newGame" onclick="newGame()">New Game</a>
+        <a href="#about">About</a>
+    </div>
     <div class="title">Determine the Contents of the Unknown Gas Mixture</div>
     <div class="canvasses">
         <div class="header">Unknown Sample Mixture (<span id="count"></span>)</div>
@@ -30,7 +34,7 @@
         <div class="submission-panel">
             <div class="submit-guess-button" onclick="submitGuess();">Submit Guess</div>
             <div class="score-message">Click the elements you think are in the sample</div>
-            <div class="score">0 points</div>
+            <div class="score" id="score">0 points</div>
         </div>
     </div>
     <script>
@@ -50,6 +54,7 @@
         });
     });
     document.getElementById('elementSelect').addEventListener('wheel', function(e) {
+        e.preventDefault();
         if (this.hasFocus) {
             return;
         }
@@ -62,7 +67,28 @@
             else{this.selectedIndex = Math.min(this.selectedIndex + 1, this.length);}
         }
         plot(Object.keys(elementalLines)[this.selectedIndex]);
+        e.stopPropagation();
     });
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    function my2Function() {
+        document.getElementById("")
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+        }
+    }
+    }
     </script>  
 </body>
 </html>
