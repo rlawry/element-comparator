@@ -16,6 +16,7 @@
         <canvas id="unknown"></canvas>
         <div class="header bottom-canvas">Known Sample</div>
         <canvas id="known"></canvas>
+        <canvas id="magnifier-lens" width="100" height="100"></canvas>
     </div>                                                                               
     <div class="display-options">
         <div class="element-display"><span>Display a known element: </span><select class="select-box" id="elementSelect" onchange="plot(this.options[this.selectedIndex].value)"></select></div>
@@ -27,7 +28,7 @@
             </select>
         </div>
         <div class="absorption-display"><input type="checkbox" name="showSpectra" value="isChecked" onclick="switchState()"> Show absorption</div>
-    </select></div>
+        <label><input type="checkbox" id="magnifier-toggle">Enable Magnifier</label></select></div>
     <div class="game">
         <div id="guess-container" class="guess-container"></div>
         <div id="guess-counter" class="guess-counter">0 elements selected</div>
@@ -90,5 +91,6 @@
     }
     }
     </script>  
+    <script src="magnifier.js"></script>
 </body>
 </html>
