@@ -11,45 +11,63 @@ const lensDiameter = lensRadius * 2;
 // Event listeners
 magnifierToggle.addEventListener("change", (e) => {
   if (e.target.checked) {
-    lens.style.display = "block";
     canvas.addEventListener("mousemove", moveMagnifier);
+    canvas.addEventListener("mouseenter", showMagnifier);
+    canvas.addEventListener("mouseleave", hideMagnifier);
   } else {
-    lens.style.display = "none";
+    hideMagnifier(); // Ensure it's hidden when toggled off
     canvas.removeEventListener("mousemove", moveMagnifier);
+    canvas.removeEventListener("mouseenter", showMagnifier);
+    canvas.removeEventListener("mouseleave", hideMagnifier);
   }
 });
+
+function showMagnifier() {
+  lens.style.display = "block";
+}
+
+// Function to hide the magnifier
+function hideMagnifier() {
+  lens.style.display = "none";
+}
+
 
 // Function to move the magnifier lens
 // Function to move the magnifier lens
 function moveMagnifier(event) {
-    const rect = canvas.getBoundingClientRect();
-    
-    // Cursor position relative to the canvas
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+  const rect = canvas.getBoundingClientRect();
+
+  // Calculate scaling ratios
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
   
-    // Position the magnifier lens centered on the cursor
-    lens.style.left = `${event.clientX - lensRadius}px`;
-    lens.style.top = `${event.clientY - lensRadius}px`;
-  
-    // Clear the previous magnified content
-    lensCtx.clearRect(0, 0, lensDiameter, lensDiameter);
-  
-    // Calculate the starting position for the magnified area
-    // Divide lensRadius by magnification level to keep the object centered
-    const srcX = x - lensRadius / magnificationLevel;
-    const srcY = y - lensRadius / magnificationLevel;
-  
-    // Draw the magnified area in the lens
-    lensCtx.drawImage(
-      canvas,
-      srcX,
-      srcY,
-      lensDiameter / magnificationLevel,    // Width of the magnified area on canvas
-      lensDiameter / magnificationLevel,    // Height of the magnified area on canvas
-      0,
-      0,
-      lensDiameter,
-      lensDiameter
-    );
-  }
+  // Cursor position relative to the canvas, adjusted for any CSS scaling
+  const x = (event.clientX - rect.left) * scaleX;
+  const y = (event.clientY - rect.top) * scaleY;
+
+  // Position the magnifier lens centered on the cursor
+  lens.style.left = `${event.clientX - lensRadius}px`;
+  lens.style.top = `${event.clientY - lensRadius}px`;
+
+  // Clear previous magnified content
+  lensCtx.clearRect(0, 0, lensDiameter, lensDiameter);
+
+  // Calculate the source coordinates for the magnified area on the canvas
+  const srcX = x - (lensRadius / magnificationLevel);
+  const srcY = y - (lensRadius / magnificationLevel);
+
+  // Draw the magnified area in the lens canvas
+  lensCtx.fillStyle = "black";
+  lensCtx.fillRect(0,0,lensDiameter,lensDiameter);
+  lensCtx.drawImage(
+    canvas,
+    srcX,
+    srcY,
+    lensDiameter / magnificationLevel, // Width of the area on the main canvas to magnify
+    lensDiameter / magnificationLevel, // Height of the area on the main canvas to magnify
+    0,
+    0,
+    lensDiameter,
+    lensDiameter
+  );
+}

@@ -99,7 +99,6 @@ function init() {                                                               
 function submitGuess(){
     var score = 0;
     var target = 3;
-    var totalClicked = 0;
     var sel = document.querySelectorAll(".guess-button");
     console.log(sel[1].id);
     console.log(sel[1].classList);
@@ -112,17 +111,23 @@ function submitGuess(){
             }
         }
     }
-    if(selectTotal<=target){
+    if(selectTotal==target){
         if(score <= 0){
-            $('.score-message').text("You lose");
+            $('.score-message').text("Incorrect.");
         }
         else if(score == target){
             points++;
-            $('.score-message').text("You win.");}
+            $('.score-message').text("You win.");
+            disableSubmitButton(2000);
+            nextPoint();
+        }
         else if(score>0&&score<target){$('.score-message').text("Something is right.");}
     }
+    else if(selectTotal<target){
+        $('.score-message').text("Select three elements.")
+    }
     else{
-        $('.score-message').text("Too many");
+        $('.score-message').text("You have selected too many.");
     }
     $('.score').text(points + " points");
 }
@@ -391,6 +396,12 @@ function newGame(){
     document.getElementById("score").innerHTML = "0 points";
 }
 
+function nextPoint(){
+    elementList.splice(0, elementList.length);
+    newGameStarted = true;
+    generateUnknownSample();
+}
+
 function plot(e){
     plotElement(e,ctxKnown,"no-mix");
     console.log("YOW");
@@ -451,4 +462,18 @@ function switchGradient() {
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+let isCooldown = false; // Cooldown flag to prevent spamming
+
+function disableSubmitButton(delay) {
+    let submitButton = document.getElementById("submit-button");
+    submitButton.disabled = true;
+    isCooldown = true;
+
+    // Re-enable the button after the delay
+    setTimeout(() => {
+        submitButton.disabled = false;
+        isCooldown = false;
+    }, delay);
 }
