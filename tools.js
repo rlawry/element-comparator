@@ -26,6 +26,8 @@ var selectedOption = {};
 var points = 0;
 var newGameStarted = true;
 
+
+
 function setGradient() {
 
     var gradient = ctxUnknown.createLinearGradient(0, 0, canvasUnknown.width - padding, 0);            //The gradient for color selection can probably be done in other ways, but this way was 
@@ -93,7 +95,63 @@ function init() {                                                               
 
     plotElement('Hydrogen', ctxKnown, "mix");
     generateUnknownSample();
-    makeSelections();   
+    makeSelections();
+    
+    $(function() {                       //run when the DOM is ready
+        $(".guess-button").on('click',function() {  //use a class, since your ID gets mangled
+          $(this).toggleClass("active");      //add the class to the clicked element
+          if(selectedOption[$(this).text()]==false){
+              selectedOption[$(this).text()]=true;
+              selectTotal++;
+          }
+          else if(selectedOption[$(this).text()]==true){
+              selectedOption[$(this).text()]=false;
+              selectTotal--;            
+          }
+          if(selectTotal==1){$('#guess-counter').text(selectTotal + " element selected");}
+          else if (selectTotal!=1){$('#guess-counter').text(selectTotal + " elements selected");}
+          console.log("clicked.  did anything happen?");
+        });
+    
+    });
+    document.getElementById('elementSelect').addEventListener('wheel', function(e) {
+        e.preventDefault();
+        if (this.hasFocus) {
+            return;
+        }
+        if (e.deltaY < 0) {
+            if(this.selectedIndex - 1 < 0){this.selectedIndex = this.length-1;}
+            else{this.selectedIndex = Math.max(this.selectedIndex - 1, 0);}
+        }
+        if (e.deltaY > 0) {
+            if(this.selectedIndex + 1 >= this.length){this.selectedIndex = 0;}
+            else{this.selectedIndex = Math.min(this.selectedIndex + 1, this.length);}
+        }
+        plot(Object.keys(elementalLines)[this.selectedIndex]);
+        e.stopPropagation();
+    });
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    function my2Function() {
+        document.getElementById("")
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+            }
+        }
+    }
+
+
 }
 
 function submitGuess(){
