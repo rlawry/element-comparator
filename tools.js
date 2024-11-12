@@ -365,11 +365,7 @@ function plotElement(e, k, n) {         //e = element must be string, k = contex
     var brightnessAdd;
     var intensity = new Array();
     intensity = elementalLines[element]['intensity'];                               //create an array of the intensities for the element
-    var maxIntensity = 0;
-
-    for(var i = 0; i<intensity.length;i++){
-        if(intensity[i]>maxIntensity){maxIntensity = intensity[i];}
-    }
+    var maxIntensity = Math.max(...intensity);
     var gradient = setGradient();                                                   //set the gradient maps so you can choose the correct color
     if(n=="no-mix"||newGameStarted==true){                                              
         if (showSpectrum == false) {
